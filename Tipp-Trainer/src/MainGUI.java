@@ -24,6 +24,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     private Boolean gameRunning = false;
     private int time = 0;
     private int anz = 0;
+    private String currentUser;
 
     /**
      * Creates new form MainGUI
@@ -193,6 +194,11 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         jMenu1.add(miRanking);
 
         miClose.setText("Close");
+        miClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miCloseActionPerformed(evt);
+            }
+        });
         jMenu1.add(miClose);
 
         jMenuBar1.add(jMenu1);
@@ -215,12 +221,15 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     private void btEnterGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnterGameActionPerformed
         try {
-
+            if(liPlayList.isSelectionEmpty()){
+                JOptionPane.showMessageDialog(null,"Please select first a Level!");
+            }else{
             time = 0;
             String txt = model.enterGame(liPlayList.getSelectedIndex());
             tfText.setText(txt);
             lbStatus.setText("Game starts with first pressed key!");
             lbKey.setText(tfText.getText().charAt(0) + "");
+            }
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -237,12 +246,21 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_paBackgroundKeyPressed
 
     private void miLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogOutActionPerformed
-
+        currentUser = "";
+        lbWho.setText("");
+        gameEnd();
+        loginSigin();
     }//GEN-LAST:event_miLogOutActionPerformed
 
     private void liPlayListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liPlayListValueChanged
         lbStatus.setText("Game selected!");
+        
     }//GEN-LAST:event_liPlayListValueChanged
+
+    private void miCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCloseActionPerformed
+        gameEnd();
+        System.exit(EXIT_ON_CLOSE);
+    }//GEN-LAST:event_miCloseActionPerformed
 
     private void loginSigin() {
 
@@ -257,6 +275,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
                 if (b) {
                     lbWho.setText("Logged in as: " + s.getUsername());
+                    currentUser = s.getUsername();
 
                 } else {
 
@@ -324,7 +343,6 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                 @Override
                 public void run() {
 
-                 
                     while (gameRunning) {
                         try {
 
@@ -340,13 +358,13 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         }
 
         if (gameRunning) {
-            
+
             if (ke.getKeyChar() == tfText.getText().charAt(0)) {
                 tfText.setText(tfText.getText().substring(1));
                 try {
-                lbKey.setText(tfText.getText().charAt(0) + "");
-            } catch (Exception e) {
-            }
+                    lbKey.setText(tfText.getText().charAt(0) + "");
+                } catch (Exception e) {
+                }
                 if (tfText.getText().isEmpty()) {
 
                     gameEnd();
@@ -358,11 +376,10 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     }
 
     public void gameEnd() {
-        
+
         /**
-         * IF Game is finished 
-         * Labels gets resetet 
-         * And "Finished Message" get showed!
+         * IF Game is finished Labels gets resetet And "Finished Message" get
+         * showed!
          */
         gameRunning = false;
         JOptionPane.showMessageDialog(null, "You needed for " + model.getNowText().length() + " Characters " + time + " Seconds");

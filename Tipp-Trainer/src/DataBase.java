@@ -101,7 +101,6 @@ public class DataBase {
 
         }
         for (User user : users) {
-            System.out.println(user.toString());
             if (user.getUsername().equals(loginuser.getUsername())
                     && user.getPassword().equals(loginuser.getPassword())) {
 
