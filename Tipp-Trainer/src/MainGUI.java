@@ -1,11 +1,8 @@
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -19,6 +16,9 @@ import javax.swing.ListSelectionModel;
  */
 public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
+    /**
+     * Variable are here
+     */
     private DataBase db;
     private PlayBl model = new PlayBl();
     private Boolean gameRunning = false;
@@ -32,7 +32,9 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     public MainGUI() {
         initComponents();
         this.setTitle("Tipp-Trainer");
-
+        /**
+         * DataBase get added and created!
+         */
         try {
             db = DataBase.getInstance();
             db.createTableUsers();
@@ -40,12 +42,16 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-
+        /**
+         * List model get loaded!
+         */
         liPlayList.setModel(model);
         liPlayList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
+        /**
+         * Login Dialog gets showed!
+         */
         loginSigin();
-
         btEnterGame.addKeyListener(this);
 
     }
@@ -77,17 +83,6 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-        });
-
-        paBackground.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                paBackgroundKeyPressed(evt);
-            }
-        });
 
         lbWho.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -191,6 +186,11 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         jMenu1.add(miLogOut);
 
         miRanking.setText("Show ranking");
+        miRanking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRankingActionPerformed(evt);
+            }
+        });
         jMenu1.add(miRanking);
 
         miClose.setText("Close");
@@ -220,6 +220,11 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btEnterGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnterGameActionPerformed
+        /**
+         * Looks for Selected Level and loads it Waits for User input to start
+         * Starts timer
+         */
+
         try {
             if (liPlayList.isSelectionEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please select first a Level!");
@@ -237,15 +242,12 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     }//GEN-LAST:event_btEnterGameActionPerformed
 
-    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-
-    }//GEN-LAST:event_formKeyReleased
-
-    private void paBackgroundKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_paBackgroundKeyPressed
-
-    }//GEN-LAST:event_paBackgroundKeyPressed
-
     private void miLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogOutActionPerformed
+        /**
+         * current user gets log out Label Text gets changed Login Dialog gets
+         * showed!
+         */
+
         currentUser = "";
         lbWho.setText("");
         gameEnd();
@@ -253,21 +255,42 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     }//GEN-LAST:event_miLogOutActionPerformed
 
     private void liPlayListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liPlayListValueChanged
+        /**
+         * If User select an other level it gets changed!
+         */
         lbStatus.setText("Game selected!");
-
     }//GEN-LAST:event_liPlayListValueChanged
 
     private void miCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCloseActionPerformed
+        /**
+         * Game stops Window gets closed.
+         */
+
         gameEnd();
         System.exit(EXIT_ON_CLOSE);
     }//GEN-LAST:event_miCloseActionPerformed
 
+    private void miRankingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRankingActionPerformed
+        /**
+         * For Future update
+         */
+    }//GEN-LAST:event_miRankingActionPerformed
+
     private void loginSigin() {
+        
+        /**
+         * Login Dialog gets showed!
+         */
 
         LoginDialog d = new LoginDialog(new JFrame(), true);
         d.setVisible(true);
         try {
-
+            /**
+             * If Button =1
+             * Input gets checked
+             * True-> User gets loged in
+             * False-> JOption Pane + Login Dialog gets showed again
+             */
             if (d.getButton() == 1) {
                 User s = d.getUser();
 
@@ -282,7 +305,14 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                     JOptionPane.showMessageDialog(null, "Username or Password incorrect!");
                     loginSigin();
                 }
-
+                
+                /**
+             * If Button =2
+             * Input gets checked if it is douple
+             * False-> User gets loged in
+             * True-> JOption Pane + Login Dialog gets showed again
+             */
+                
             } else if (d.getButton() == 2) {
                 User s = d.getUser();
                 db.insertTestData(s.getUsername(), s.getPassword(), 0);
@@ -295,6 +325,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         } catch (Exception ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Fehler");
+            loginSigin();
         }
 
     }
@@ -333,12 +364,21 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent ke) {
+        /**
+         * If Player type a key and game is running-> Game starts
+         * 
+         */
         btEnterGame.getInputMap().put(KeyStroke.getKeyStroke("SPACE"), "none");
 
         gameRunning = true;
         lbStatus.setText("Game is runnig");
         if (anz == 0) {
             anz++;
+            
+            /**
+             * Thread counts seconds that a player need to finish game!
+             */
+            
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -358,18 +398,32 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         }
 
         if (gameRunning) {
+            
+            /**
+             * Needed key gets showed in a label
+             * If player types the right key 
+             * True-> label becomes green and User can type the next key
+             * False-> label becomes red and User has to click the right key!
+             */
 
             if (ke.getKeyChar() == tfText.getText().charAt(0)) {
+                lbKey.setForeground(Color.green);
                 tfText.setText(tfText.getText().substring(1));
                 try {
                     lbKey.setText(tfText.getText().charAt(0) + "");
                 } catch (Exception e) {
                 }
+                
+                /**
+                 * If the Text Field is empty -> Methode "gameEnd()" gets called!
+                 */
                 if (tfText.getText().isEmpty()) {
 
                     gameEnd();
 
                 }
+            } else {
+                lbKey.setForeground(Color.red);
             }
         }
 
@@ -392,11 +446,16 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent ke) {
-
+        /**
+         * Not needed yet
+         */
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
+         /**
+         * Not needed yet
+         */
 
     }
 }
