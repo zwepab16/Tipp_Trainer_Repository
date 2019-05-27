@@ -110,22 +110,6 @@ public class DataBase {
         return false;
 
     }
-//    
-//    public Pet getPetByName(String name) throws Exception{
-//        Pet p = null;
-//        
-//        String sql = "SELECT * FROM Pet WHERE name = ?";
-//        PreparedStatement ps = conn.prepareStatement(sql);
-//        ps.setString(1, name);
-//        
-//        ResultSet rs = ps.executeQuery();
-//        if(rs.next()){
-//            p = new Pet( rs.getInt("id"), 
-//                         rs.getString("name"), 
-//                         rs.getString("rasse"));
-//        }
-//        
-//        return p;
-//    }
+
 
 }
