@@ -32,6 +32,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     public MainGUI() {
         initComponents();
         this.setTitle("Tipp-Trainer");
+        
         /**
          * DataBase get added and created!
          */
@@ -168,8 +169,8 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                         .addGap(18, 18, 18)
                         .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(tfText, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addComponent(tfText, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
                         .addComponent(lbKey, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
@@ -232,6 +233,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                 time = 0;
                 String txt = model.enterGame(liPlayList.getSelectedIndex());
                 tfText.setText(txt);
+                this.tfText.setSize(587, 80);
                 lbStatus.setText("Game starts with first pressed key!");
                 lbKey.setText(tfText.getText().charAt(0) + "");
             }
@@ -254,6 +256,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         loginSigin();
     }//GEN-LAST:event_miLogOutActionPerformed
 
+  
     private void liPlayListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liPlayListValueChanged
         /**
          * If User select an other level it gets changed!
@@ -276,6 +279,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
          */
     }//GEN-LAST:event_miRankingActionPerformed
 
+    
     private void loginSigin() {
         
         /**

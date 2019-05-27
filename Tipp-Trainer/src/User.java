@@ -4,7 +4,12 @@ public class User {
     private String username;
     private String password;
     private int level;
-
+/**
+ * Constructor
+ * @param username
+ * @param password
+ * @param level 
+ */
     public User(String username, String password, int level) {
         this.username = username;
         this.password = password;
@@ -35,6 +40,11 @@ public class User {
         this.password = password;
     }
 
+    /**
+     * To String
+     * Only needed to test program
+     * @return 
+     */
     @Override
     public String toString() {
         return "User{" + "name=" + username + ", password=" + password + '}';
