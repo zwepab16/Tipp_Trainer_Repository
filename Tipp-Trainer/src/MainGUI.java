@@ -221,14 +221,14 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     private void btEnterGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btEnterGameActionPerformed
         try {
-            if(liPlayList.isSelectionEmpty()){
-                JOptionPane.showMessageDialog(null,"Please select first a Level!");
-            }else{
-            time = 0;
-            String txt = model.enterGame(liPlayList.getSelectedIndex());
-            tfText.setText(txt);
-            lbStatus.setText("Game starts with first pressed key!");
-            lbKey.setText(tfText.getText().charAt(0) + "");
+            if (liPlayList.isSelectionEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please select first a Level!");
+            } else {
+                time = 0;
+                String txt = model.enterGame(liPlayList.getSelectedIndex());
+                tfText.setText(txt);
+                lbStatus.setText("Game starts with first pressed key!");
+                lbKey.setText(tfText.getText().charAt(0) + "");
             }
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
@@ -254,7 +254,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
     private void liPlayListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liPlayListValueChanged
         lbStatus.setText("Game selected!");
-        
+
     }//GEN-LAST:event_liPlayListValueChanged
 
     private void miCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCloseActionPerformed
