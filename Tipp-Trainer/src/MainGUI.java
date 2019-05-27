@@ -60,7 +60,6 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
         paBackground = new javax.swing.JPanel();
         lbWho = new javax.swing.JLabel();
-        tfText = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         liPlayList = new javax.swing.JList<>();
@@ -68,6 +67,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         lbTime = new javax.swing.JLabel();
         lbKey = new javax.swing.JLabel();
         lbStatus = new javax.swing.JLabel();
+        tfText = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         miLogOut = new javax.swing.JMenuItem();
@@ -89,17 +89,17 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
 
         lbWho.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tfText.setEditable(false);
-        tfText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        tfText.setAutoscrolls(false);
-        tfText.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Text")));
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Select Level")));
 
         liPlayList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        liPlayList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                liPlayListValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(liPlayList);
 
@@ -129,6 +129,9 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("GameStatus"));
 
+        tfText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        tfText.setBorder(javax.swing.BorderFactory.createTitledBorder("Text"));
+
         javax.swing.GroupLayout paBackgroundLayout = new javax.swing.GroupLayout(paBackground);
         paBackground.setLayout(paBackgroundLayout);
         paBackgroundLayout.setHorizontalGroup(
@@ -140,7 +143,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                     .addGroup(paBackgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btEnterGame, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 528, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
                         .addComponent(lbWho, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(paBackgroundLayout.createSequentialGroup()
                         .addGroup(paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -151,8 +154,8 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                                 .addGap(39, 39, 39)
                                 .addGroup(paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lbKey, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tfText, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE))))
+                                    .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                                    .addComponent(tfText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         paBackgroundLayout.setVerticalGroup(
@@ -218,8 +221,8 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
             time = 0;
             String txt = model.enterGame(liPlayList.getSelectedIndex());
             tfText.setText(txt);
-            System.out.println(txt);
-            lbStatus.setText("Game selected");
+            lbStatus.setText("Game starts with first pressed key!");
+            lbKey.setText(tfText.getText().charAt(0) + "");
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -238,6 +241,10 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     private void miLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miLogOutActionPerformed
 
     }//GEN-LAST:event_miLogOutActionPerformed
+
+    private void liPlayListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_liPlayListValueChanged
+        lbStatus.setText("Game selected!");
+    }//GEN-LAST:event_liPlayListValueChanged
 
     private void loginSigin() {
 
@@ -304,7 +311,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     private javax.swing.JMenuItem miLogOut;
     private javax.swing.JMenuItem miRanking;
     private javax.swing.JPanel paBackground;
-    private javax.swing.JTextField tfText;
+    private javax.swing.JLabel tfText;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -319,10 +326,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
                 @Override
                 public void run() {
 
-                    try {
-                        lbKey.setText(tfText.getText().charAt(0) + "");
-                    } catch (Exception e) {
-                    }
+                 
                     while (gameRunning) {
                         try {
 
@@ -338,12 +342,13 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         }
 
         if (gameRunning) {
-            try {
-                lbKey.setText(tfText.getText().charAt(1) + "");
-            } catch (Exception e) {
-            }
+            
             if (ke.getKeyChar() == tfText.getText().charAt(0)) {
                 tfText.setText(tfText.getText().substring(1));
+                try {
+                lbKey.setText(tfText.getText().charAt(0) + "");
+            } catch (Exception e) {
+            }
                 if (tfText.getText().isEmpty()) {
 
                     gameEnd();
@@ -355,12 +360,19 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
     }
 
     public void gameEnd() {
+        
+        /**
+         * IF Game is finished 
+         * Labels gets resetet 
+         * And "Finished Message" get showed!
+         */
         gameRunning = false;
         JOptionPane.showMessageDialog(null, "You needed for " + model.getNowText().length() + " Characters " + time + " Seconds");
         anz = 0;
         tfText.setText("");
         lbTime.setText("");
         lbStatus.setText("Game finished!");
+        lbKey.setText("");
     }
 
     @Override
