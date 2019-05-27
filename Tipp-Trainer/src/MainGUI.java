@@ -90,6 +90,8 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         lbWho.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tfText.setEditable(false);
+        tfText.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfText.setAutoscrolls(false);
         tfText.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Text")));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Select Level")));
@@ -124,6 +126,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         lbKey.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 48)); // NOI18N
         lbKey.setBorder(javax.swing.BorderFactory.createTitledBorder("Needed Key"));
 
+        lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("GameStatus"));
 
         javax.swing.GroupLayout paBackgroundLayout = new javax.swing.GroupLayout(paBackground);
@@ -215,6 +218,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
             time = 0;
             String txt = model.enterGame(liPlayList.getSelectedIndex());
             tfText.setText(txt);
+            System.out.println(txt);
             lbStatus.setText("Game selected");
         } catch (IOException ex) {
             Logger.getLogger(MainGUI.class.getName()).log(Level.SEVERE, null, ex);

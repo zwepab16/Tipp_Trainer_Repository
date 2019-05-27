@@ -35,16 +35,16 @@ public class PlayBl extends AbstractListModel {
 
     public String enterGame(int lvl) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader((File) list.get(lvl)));
+        BufferedReader reader = new BufferedReader(new FileReader((File)list.get(lvl)));
 
-        String content = "";
+        String content="";
         String line;
 
         while ((line = reader.readLine()) != null) {
-            content += line;
-
+            content+=line;
+         
         }
-        nowText = content;
+        nowText=content;
         return content;
 
     }
@@ -52,5 +52,8 @@ public class PlayBl extends AbstractListModel {
     public String getNowText() {
         return nowText;
     }
+    
+    
+    
 
 }
