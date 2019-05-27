@@ -75,6 +75,7 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         miClose = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 formKeyReleased(evt);
@@ -126,11 +127,12 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
         lbKey.setFont(new java.awt.Font("Rockwell Extra Bold", 1, 48)); // NOI18N
         lbKey.setBorder(javax.swing.BorderFactory.createTitledBorder("Needed Key"));
 
-        lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lbStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lbStatus.setBorder(javax.swing.BorderFactory.createTitledBorder("GameStatus"));
 
         tfText.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         tfText.setBorder(javax.swing.BorderFactory.createTitledBorder("Text"));
+        tfText.setOpaque(true);
 
         javax.swing.GroupLayout paBackgroundLayout = new javax.swing.GroupLayout(paBackground);
         paBackground.setLayout(paBackgroundLayout);
@@ -139,24 +141,20 @@ public class MainGUI extends javax.swing.JFrame implements KeyListener {
             .addGroup(paBackgroundLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(paBackgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lbKey, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(paBackgroundLayout.createSequentialGroup()
                         .addComponent(btEnterGame, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
-                        .addComponent(lbWho, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 330, Short.MAX_VALUE)
+                        .addComponent(lbWho, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(paBackgroundLayout.createSequentialGroup()
-                        .addGroup(paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(paBackgroundLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, paBackgroundLayout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lbKey, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
-                                    .addComponent(tfText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lbTime, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tfText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         paBackgroundLayout.setVerticalGroup(
             paBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
