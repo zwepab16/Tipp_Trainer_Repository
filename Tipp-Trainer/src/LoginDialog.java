@@ -15,7 +15,10 @@ public class LoginDialog extends javax.swing.JDialog {
      */
     private User user;
     private boolean bool;
-    private int button = 0;//1--> login    2--> sigin
+    /**
+     * 1--> login    2--> sigin
+     */
+    private int button = 0;
 
     public User getUser() {
         return user;
@@ -29,6 +32,11 @@ public class LoginDialog extends javax.swing.JDialog {
         return button;
     }
 
+    /**
+     * Dialog gets created!
+     * @param parent
+     * @param modal 
+     */
     public LoginDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -141,6 +149,11 @@ public class LoginDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * A new user gets created with the User Input and sended to the MainGUI
+     * And Button stands for "login"
+     * @param evt 
+     */
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
 
         user = new User(tfUsername.getText(), tfPassword.getText(), 0);
@@ -149,6 +162,11 @@ public class LoginDialog extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btLoginActionPerformed
 
+    /**
+     * A new user gets created with the User Input and sended to the MainGUI
+     * And Button stands for "sigin"
+     * @param evt 
+     */
     private void btSiginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSiginActionPerformed
         user = new User(tfUsername.getText(), tfPassword.getText(), 0);
         bool = true;
