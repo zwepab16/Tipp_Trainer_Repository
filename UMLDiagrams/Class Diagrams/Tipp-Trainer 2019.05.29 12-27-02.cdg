@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Tipp-Trainer">
   <ClassDiagramComponents>
-    <Class name="DataBase" package="" visibility="public" xPosition="20.0" yPosition="20.0">
+    <Class name="DataBase" package="" visibility="public" xPosition="779.0" yPosition="292.0">
       <Fields>
         <Field name="theInstance" type="DataBase" visibility="private" isStatic="true"/>
         <Field name="conn" type="Connection" visibility="private"/>
@@ -31,7 +31,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="LoginDialog" package="" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="LoginDialog" package="" visibility="public" xPosition="970.0" yPosition="737.0">
       <Fields>
         <Field name="user" type="User" visibility="private"/>
         <Field name="bool" type="boolean" visibility="private"/>
@@ -54,8 +54,7 @@
         <Method name="getUser" returnType="User" visibility="public"/>
         <Method name="isBool" returnType="boolean" visibility="public"/>
         <Method name="getButton" returnType="int" visibility="public"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="btLoginActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -67,7 +66,7 @@ void" visibility="private"/>
         </Method>
       </Methods>
     </Class>
-    <Class name="MainGUI" package="" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="MainGUI" package="" visibility="public" xPosition="36.0" yPosition="32.0">
       <Fields>
         <Field name="db" type="DataBase" visibility="private"/>
         <Field name="model" type="PlayBl" visibility="private"/>
@@ -96,8 +95,7 @@ void" visibility="private"/>
       </Constructors>
       <Methods>
         <Method name="enterDB" returnType="void" visibility="public"/>
-        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
-void" visibility="private"/>
+        <Method name="initComponents" returnType="// &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents void" visibility="private"/>
         <Method name="btEnterGameActionPerformed" returnType="void" visibility="private">
           <Argument type="java.awt.event.ActionEvent" name="evt"/>
         </Method>
@@ -179,12 +177,12 @@ void" visibility="private"/>
     </Class>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
+    <UseRelation source="DataBase" target="DataBase" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="user" source="LoginDialog" target="User" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="LoginDialog" target="User" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="model" source="MainGUI" target="PlayBl" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="DataBase" target="DataBase" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="theInstance" source="DataBase" target="DataBase" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="DataBase" target="User" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="db" source="MainGUI" target="DataBase" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="DataBase" target="User" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="model" source="MainGUI" target="PlayBl" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
