@@ -15,9 +15,9 @@ public class LoginDialog extends javax.swing.JDialog {
      */
     private User user;
     private boolean bool;
-    /**
-     * 1--> login    2--> sigin
-     */
+    
+    
+    
     private int button = 0;
 
     public User getUser() {

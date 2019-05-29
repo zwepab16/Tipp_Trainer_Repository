@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  * Class for accessing the Database implemented as Singleton
@@ -18,7 +19,8 @@ public class DataBase {
      */
     private static DataBase theInstance;
 
-    private final Connection conn;
+    private Connection conn;
+    private String dbUser, dbPassword;
 
     /**
      * Constructor is private for singleton implementation.
@@ -26,11 +28,29 @@ public class DataBase {
     public DataBase() throws SQLException {
         try {
             Class.forName("org.postgresql.Driver");
+            getConnection();
+
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            getConnection();
         }
 
-        conn = DriverManager.getConnection("jdbc:postgresql://localhost/petDB", "postgres", "postgres");
+    }
+    /**
+     * To get the connection to the DB
+     * @throws SQLException 
+     */
+    public void getConnection() throws SQLException {
+        dbUser = JOptionPane.showInputDialog("Enter DB Username!","postgres");
+        dbPassword = JOptionPane.showInputDialog("Enter DB Password!","postgres");
+        conn = DriverManager.getConnection("jdbc:postgresql://localhost/petDB", dbUser, dbPassword);
+    }
+
+    public void setDbUser(String dbUser) {
+        this.dbUser = dbUser;
+    }
+
+    public void setDbPassword(String dbPassword) {
+        this.dbPassword = dbPassword;
     }
 
     /**
@@ -46,12 +66,10 @@ public class DataBase {
     }
 
     public void createTableUsers() throws Exception {
-        
+
         /**
-         * User Table gets created
-         * Columns: Username, Password, Level
+         * User Table gets created Columns: Username, Password, Level
          */
-         
         String sql = "CREATE TABLE IF NOT EXISTS Users"
                 + "("
                 + "    Username character varying NOT NULL PRIMARY KEY,"
@@ -65,12 +83,10 @@ public class DataBase {
     }
 
     public void insertTestData(String username, String pw, int level) throws Exception {
-        
+
         /**
-         * Data gets inserted 
-         * When sigin
+         * Data gets inserted When sigin
          */
-        
         User u = new User(username, pw, level);
         String s = "'" + u.getUsername() + "', '" + pw + "', '" + level + "'";
 
@@ -81,12 +97,12 @@ public class DataBase {
     }
 
     public boolean checkLogin(User loginuser) throws Exception {
-        
+
         /**
          * User input gets checked in Database
+         *
          * @return Returns true when User is saved in Database
          */
-                
         ArrayList<User> users = new ArrayList<>();
 
         String sql = "SELECT * FROM Users";
@@ -110,6 +126,5 @@ public class DataBase {
         return false;
 
     }
-
 
 }

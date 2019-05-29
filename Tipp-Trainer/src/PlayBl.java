@@ -1,7 +1,6 @@
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ public class PlayBl extends AbstractListModel {
      */
     private ArrayList list = new ArrayList<File>();
     private String nowText;
+    
 
     /**
      * Searches for all .txt files in the "levels" folder
